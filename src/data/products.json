@@ -1,0 +1,24 @@
+[
+    {
+      "id": "1",
+      "name": "Nike Air Max 90",
+      "price": "$129.99",
+      "category": "Running Shoes",
+      "description": "Classic comfort and durability with modern style."
+    },
+    {
+      "id": "2",
+      "name": "Adidas Ultraboost",
+      "price": "$149.99",
+      "category": "Running Shoes",
+      "description": "Responsive cushioning for long-distance runners."
+    },
+    {
+      "id": "3",
+      "name": "Puma Flyer Flex",
+      "price": "$79.99",
+      "category": "Training Shoes",
+      "description": "Lightweight, breathable training shoes for everyday workouts."
+    }
+  ]
+  
