@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot Widget Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    h1 {
+      color: #4F46E5;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      border-bottom: 2px solid #eaeaea;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .product-card {
+      border: 1px solid #eaeaea;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .product-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .product-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .product-price {
+      color: #4F46E5;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .product-button {
+      background-color: #4F46E5;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .product-button:hover {
+      background-color: #3730a3;
+    }
+    .api-key-input {
+      display: flex;
+      margin-top: 20px;
+      gap: 10px;
+    }
+    .api-key-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .api-key-input button {
+      background-color: #4F46E5;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Chatbot Widget Test</h1>
+    <p class="subtitle">Test your AI-powered eCommerce chatbot</p>
+  </header>
+
+  <div class="section">
+    <h2>Widget Configuration</h2>
+    <p>Enter your API key below to activate the chat widget. You can customize the appearance using the data attributes.</p>
+    
+    <div class="api-key-input">
+      <input type="text" id="apiKeyInput" placeholder="Enter your API key here" value="your_secure_api_key_here">
+      <button onclick="updateWidget()">Apply</button>
+    </div>
+    
+    <pre><code>&lt;script 
+  src="/widget.js" 
+  data-api-key="your_api_key"
+  data-color="#4F46E5"
+  data-position="right"
+  data-title="Store Assistant"&gt;
+&lt;/script&gt;</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Sample Products</h2>
+    <p>This is a sample product catalog. Try asking the chatbot about these products!</p>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200?text=Headphones" alt="Premium Headphones" class="product-image">
+        <div class="product-name">Premium Headphones</div>
+        <div class="product-price">$129.99</div>
+        <button class="product-button">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200?text=Smartwatch" alt="Smartwatch Pro" class="product-image">
+        <div class="product-name">Smartwatch Pro</div>
+        <div class="product-price">$199.99</div>
+        <button class="product-button">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200?text=Earbuds" alt="Wireless Earbuds" class="product-image">
+        <div class="product-name">Wireless Earbuds</div>
+        <div class="product-price">$79.99</div>
+        <button class="product-button">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/200?text=Speaker" alt="Portable Speaker" class="product-image">
+        <div class="product-name">Portable Speaker</div>
+        <div class="product-price">$89.99</div>
+        <button class="product-button">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to load the widget with a new API key
+    function updateWidget() {
+      // Remove existing widget script if any
+      const existingWidget = document.getElementById('chatbot-widget');
+      if (existingWidget) {
+        existingWidget.remove();
+      }
+      
+      // Remove existing widget elements from DOM
+      const widgetElements = document.querySelectorAll('.ai-chatbot-widget');
+      widgetElements.forEach(el => el.remove());
+      
+      // Get API key from input
+      const apiKey = document.getElementById('apiKeyInput').value;
+      
+      // Create and append new script
+      const script = document.createElement('script');
+      script.id = 'chatbot-widget';
+      script.src = '/widget.js';
+      script.setAttribute('data-api-key', apiKey);
+      script.setAttribute('data-color', '#4F46E5');
+      script.setAttribute('data-position', 'right');
+      script.setAttribute('data-title', 'Store Assistant');
+      
+      document.body.appendChild(script);
+    }
+    
+    // Initialize widget on load
+    window.onload = function() {
+      updateWidget();
+    };
+  </script>
+</body>
+</html> 
